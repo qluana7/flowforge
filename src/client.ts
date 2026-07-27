@@ -3572,7 +3572,7 @@ function openRecipeModal(machineId: string, recipeId?: string): void {
     <div class="modal-grid">
       <label class="field"><span>${
       t("form.recipe.id")
-    }</span><input name="id" required placeholder="${
+    }</span><input name="recipeId" required placeholder="${
       t("form.recipe.idPlaceholder")
     }" value="${escapeHtml(recipe?.id ?? "")}"></label>
       <label class="field"><span>${
@@ -3757,7 +3757,7 @@ function handleRecipeSubmit(form: HTMLFormElement): void {
     ? state.recipes.find((item) => item.id === definitionId)
     : undefined;
   if (definitionId && !existing) return;
-  const recipeId = String(data.get("id") ?? "").trim();
+  const recipeId = String(data.get("recipeId") ?? "").trim();
   if (!recipeId) {
     showToast(t("toast.recipeIdRequired"), "error");
     return;
@@ -4223,11 +4223,12 @@ app.addEventListener("keydown", (event) => {
 app.addEventListener("submit", async (event) => {
   event.preventDefault();
   const form = event.target as HTMLFormElement;
-  if (form.id === "resource-form") await handleResourceSubmit(form);
-  if (form.id === "auxiliary-form") handleAuxiliarySubmit(form);
-  if (form.id === "machine-form") await handleMachineSubmit(form);
-  if (form.id === "recipe-form") handleRecipeSubmit(form);
-  if (form.id === "definition-image-form") await handleImageSubmit(form);
+  const formId = form.getAttribute("id");
+  if (formId === "resource-form") await handleResourceSubmit(form);
+  if (formId === "auxiliary-form") handleAuxiliarySubmit(form);
+  if (formId === "machine-form") await handleMachineSubmit(form);
+  if (formId === "recipe-form") handleRecipeSubmit(form);
+  if (formId === "definition-image-form") await handleImageSubmit(form);
 });
 
 app.addEventListener("change", async (event) => {
