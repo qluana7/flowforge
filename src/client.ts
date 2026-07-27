@@ -3393,7 +3393,7 @@ function modalFrame(
     ${body}
     <div class="modal-actions"><button type="button" class="quiet-button" data-action="close-modal">${
     t("common.cancel")
-  }</button><button class="primary-button">${submitLabel}</button></div>
+  }</button><button type="submit" class="primary-button">${submitLabel}</button></div>
   </form>`;
 }
 
@@ -3507,7 +3507,9 @@ function recipePortRow(
     t("form.recipe.reorderPort")
   }" aria-label="${t("form.recipe.reorderPort")}">⠿</button>
     <select>${resourceOptions(port?.resourceId)}</select>
-    <input type="number" value="${port?.amount ?? 1}" required>
+    <input type="number" step="any" inputmode="decimal" value="${
+    port?.amount ?? 1
+  }" required>
     ${
     direction === "output"
       ? `<label class="probability-toggle" title="${
@@ -3541,7 +3543,9 @@ function auxiliaryRow(use?: Recipe["auxiliaryUses"][number]): string {
       }>${escapeHtml(item.name)} · ${escapeHtml(item.unit)}</option>`
     ).join("")
   }</select>
-    <input type="number" value="${use?.amount ?? 1}" required>
+    <input type="number" step="any" inputmode="decimal" value="${
+    use?.amount ?? 1
+  }" required>
     <button type="button" data-action="remove-row" aria-label="${
     t("common.delete")
   }">×</button>
@@ -3573,7 +3577,7 @@ function openRecipeModal(machineId: string, recipeId?: string): void {
     }" value="${escapeHtml(recipe?.id ?? "")}"></label>
       <label class="field"><span>${
       t("form.recipe.duration")
-    }</span><input name="duration" type="number" value="${
+    }</span><input name="duration" type="number" inputmode="decimal" value="${
       normalizeRecipeDuration(recipe?.duration ?? 5)
     }" step="0.01" required></label>
       <label class="field wide"><span>${
