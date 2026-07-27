@@ -1,0 +1,15 @@
+.DS_Store
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example
+
+# Generated browser bundle
+public/app.js
+public/app.js.map
+
+# Local Flowforge work files
+/project.json
+*.flowforge.json
+*.template.json

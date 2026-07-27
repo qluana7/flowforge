@@ -1,0 +1,16 @@
+{
+  "tasks": {
+    "build": "deno bundle src/client.ts --format=esm --sourcemap -o public/app.js",
+    "check": "deno check src/server.ts src/client.ts && deno lint src",
+    "dev": "deno task build && deno run --allow-net --allow-read=public --watch=src/,public/ src/server.ts",
+    "start": "deno task build && deno run --allow-net --allow-read=public src/server.ts"
+  },
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "deno.ns"],
+    "strict": true
+  },
+  "fmt": {
+    "semiColons": true,
+    "singleQuote": false
+  }
+}
